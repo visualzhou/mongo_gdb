@@ -45,3 +45,11 @@ MongoDB Lock at 0x7ffff65cfb80 held by thread id 0x7ffff51eb700 mongo::MODE_IX
 Thread 1 (Thread 0x7ffff7fd9cc0 (LWP 13807)):
 (gdb)
 ```
+
+### Dedup threads in gdb backtrace output
+The script expects each thread `bt` output starts with `Thread XXXX`.
+You may find [logging gdb output](https://sourceware.org/gdb/onlinedocs/gdb/Logging-Output.html) useful.
+
+```sh
+python parse_gdb_output.py <bt_output_file>
+```
