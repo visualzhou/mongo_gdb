@@ -1,4 +1,5 @@
 import re
+import sys
 
 SEP = "<SEP>"
 SUB = "0x----------------"
@@ -40,6 +41,8 @@ def parse(filename):
          cur_thread = ThreadBackTrace(line) 
        elif line.strip():
            cur_thread.lines.append(line)
+  if cur_thread.lines:
+    all_threads.append(cur_thread)
   print "All threads: ", len(all_threads)
 
   for t in all_threads:
@@ -56,7 +59,11 @@ def parse(filename):
     print
   
 def main():
-  parse("priority_gdb.out")
+  if len(sys.argv) != 2:
+      print "Usage: python {} <bt_output_file>".format(sys.argv[0])
+      return
+
+  parse(sys.argv[1])
 
 
 if __name__ == "__main__":
